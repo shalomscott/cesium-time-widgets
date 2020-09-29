@@ -1,6 +1,6 @@
 {
-  "name": "benchmap",
-  "version": "0.0.0",
+  "name": "cesium-time-widgets",
+  "version": "0.1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -21,7 +21,6 @@
     "@angular/router": "~9.1.11",
     "@ngneat/until-destroy": "^7.3.2",
     "cesium": "^1.71.0",
-    "ol": "^6.4.3",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
@@ -35,7 +34,6 @@
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
-    "@types/ol": "^6.3.1",
     "codelyzer": "^5.1.2",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",

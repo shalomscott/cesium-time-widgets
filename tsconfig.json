@@ -11,39 +11,17 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
-    "lib": [
-      "es2018",
-      "dom"
-    ],
+    "lib": ["es2018", "dom"],
     "paths": {
-      "targets": [
-        "dist/targets/targets",
-        "dist/targets"
-      ],
-      "@targets": [
-        "projects/targets/src/public-api.ts"
-      ],
+      "targets": ["dist/targets/targets", "dist/targets"],
+      "@targets": ["projects/targets/src/public-api.ts"],
       "general-utils": [
         "dist/general-utils/general-utils",
         "dist/general-utils"
       ],
-      "@general-utils": [
-        "projects/general-utils/src/public-api.ts"
-      ],
-      "cesium-map": [
-        "dist/cesium-map/cesium-map",
-        "dist/cesium-map"
-      ],
-      "@cesium-map": [
-        "projects/cesium-map/src/public-api.ts"
-      ],
-      "ol-map": [
-        "dist/ol-map/ol-map",
-        "dist/ol-map"
-      ],
-      "@ol-map": [
-        "projects/ol-map/src/public-api.ts"
-      ]
+      "@general-utils": ["projects/general-utils/src/public-api.ts"],
+      "cesium-map": ["dist/cesium-map/cesium-map", "dist/cesium-map"],
+      "@cesium-map": ["projects/cesium-map/src/public-api.ts"]
     }
   },
   "angularCompilerOptions": {

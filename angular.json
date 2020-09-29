@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "benchmap": {
+    "cesium-time-widgets": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-builders/custom-webpack:browser",
           "options": {
-            "outputPath": "dist/benchmap",
+            "outputPath": "dist/cesium-time-widgets",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -34,12 +34,9 @@
             ],
             "styles": [
               "./node_modules/cesium/Build/Cesium/Widgets/widgets.css",
-              "./node_modules/ol/ol.css",
               "src/styles.scss"
             ],
-            "scripts": [
-              "./node_modules/cesium/Build/Cesium/Cesium.js"
-            ],
+            "scripts": ["./node_modules/cesium/Build/Cesium/Cesium.js"],
             "customWebpackConfig": {
               "path": "./extra-webpack.config.js"
             }
@@ -78,18 +75,18 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "benchmap:build"
+            "browserTarget": "cesium-time-widgets:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "benchmap:build:production"
+              "browserTarget": "cesium-time-widgets:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "benchmap:build"
+            "browserTarget": "cesium-time-widgets:build"
           }
         },
         "test": {
@@ -99,13 +96,8 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss"],
             "scripts": []
           }
         },
@@ -117,20 +109,18 @@
               "tsconfig.spec.json",
               "e2e/tsconfig.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         },
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "benchmap:serve"
+            "devServerTarget": "cesium-time-widgets:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "benchmap:serve:production"
+              "devServerTarget": "cesium-time-widgets:serve:production"
             }
           }
         }
@@ -169,9 +159,7 @@
               "projects/targets/tsconfig.lib.json",
               "projects/targets/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -209,9 +197,7 @@
               "projects/general-utils/tsconfig.lib.json",
               "projects/general-utils/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -249,53 +235,11 @@
               "projects/cesium-map/tsconfig.lib.json",
               "projects/cesium-map/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
-    "ol-map": {
-      "projectType": "library",
-      "root": "projects/ol-map",
-      "sourceRoot": "projects/ol-map/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/ol-map/tsconfig.lib.json",
-            "project": "projects/ol-map/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/ol-map/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/ol-map/src/test.ts",
-            "tsConfig": "projects/ol-map/tsconfig.spec.json",
-            "karmaConfig": "projects/ol-map/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/ol-map/tsconfig.lib.json",
-              "projects/ol-map/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
     }
   },
-  "defaultProject": "benchmap"
+  "defaultProject": "cesium-time-widgets"
 }

@@ -6,8 +6,10 @@ import {
   MapService,
 } from '@general-utils';
 import {
+  AnimationViewModel,
   ArcGisMapServerImageryProvider,
   Camera,
+  ClockViewModel,
   ImageryLayer,
   OpenStreetMapImageryProvider,
   Rectangle,
@@ -18,6 +20,8 @@ import {
 @Injectable()
 export class CesiumMapService extends MapService {
   private cesiumViewer: Viewer;
+  private _clockViewModel: ClockViewModel;
+  private _animationViewModel: AnimationViewModel;
 
   private imageryLayers = new Map<string, ImageryLayer>();
 
@@ -27,6 +31,14 @@ export class CesiumMapService extends MapService {
 
   get viewer(): Viewer {
     return this.cesiumViewer;
+  }
+
+  get clockViewModel() {
+    return this._clockViewModel;
+  }
+
+  get animationViewModel() {
+    return this._animationViewModel;
   }
 
   get currentZoom(): number {
@@ -41,23 +53,25 @@ export class CesiumMapService extends MapService {
 
       this.cesiumViewer = new Viewer(elementRef.nativeElement, {
         sceneMode: SceneMode.SCENE2D,
-        animation: true,
+        animation: false,
         baseLayerPicker: false,
         fullscreenButton: false,
         homeButton: false,
         infoBox: false,
         sceneModePicker: false,
         geocoder: false,
-        timeline: true,
+        timeline: false,
         selectionIndicator: false,
         navigationHelpButton: false,
         navigationInstructionsInitiallyVisible: false,
-        clockViewModel: null,
         imageryProvider: new OpenStreetMapImageryProvider({
           url: 'https://a.tile.openstreetmap.org/',
         }),
       });
     });
+
+    this._clockViewModel = this.cesiumViewer.clockViewModel;
+    this._animationViewModel = new AnimationViewModel(this._clockViewModel);
 
     this.mapReady$.next();
     this.mapReady$.complete();

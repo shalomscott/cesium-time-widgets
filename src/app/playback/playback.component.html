@@ -1,0 +1,29 @@
+<mat-card
+  ><button
+    class="backward"
+    color="primary"
+    (click)="backward()"
+    mat-icon-button
+  >
+    <mat-icon>fast_rewind</mat-icon>
+  </button>
+  <button
+    class="play-pause"
+    color="primary"
+    (click)="togglePlay()"
+    mat-icon-button
+  >
+    <mat-icon>{{ isPlaying ? "pause" : "play_arrow" }}</mat-icon>
+  </button>
+  <button class="forward" color="primary" (click)="forward()" mat-icon-button>
+    <mat-icon>fast_forward</mat-icon>
+  </button>
+  <button
+    class="speed"
+    [color]="isSpedUp ? 'warn' : 'primary'"
+    (click)="toggleSpedUp()"
+    mat-icon-button
+  >
+    <mat-icon>speed</mat-icon>
+  </button>
+</mat-card>

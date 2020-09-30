@@ -25,13 +25,10 @@ export class CesiumComponent implements OnInit, OnDestroy {
   constructor(private cesiumMapService: CesiumMapService) {}
 
   ngOnInit() {
-    console.log(this.generateCzmlScene());
-    setTimeout(
-      () =>
-        this.cesiumMapService.viewer.dataSources.add(
-          CzmlDataSource.load(this.generateCzmlScene())
-        ),
-      2000
+    this.cesiumMapService.mapReady.subscribe(() =>
+      this.cesiumMapService.viewer.dataSources.add(
+        CzmlDataSource.load(this.generateCzmlScene())
+      )
     );
   }
 

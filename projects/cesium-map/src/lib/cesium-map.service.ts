@@ -1,8 +1,18 @@
 import { ElementRef, Injectable, NgZone } from '@angular/core';
-import { degreesToRadians, Location, MapFeature, MapService } from '@general-utils';
 import {
-  ArcGisMapServerImageryProvider, Camera, ImageryLayer,
-  OpenStreetMapImageryProvider, Rectangle, SceneMode, Viewer
+  degreesToRadians,
+  Location,
+  MapFeature,
+  MapService,
+} from '@general-utils';
+import {
+  ArcGisMapServerImageryProvider,
+  Camera,
+  ImageryLayer,
+  OpenStreetMapImageryProvider,
+  Rectangle,
+  SceneMode,
+  Viewer,
 } from 'cesium';
 
 @Injectable()
@@ -31,20 +41,20 @@ export class CesiumMapService extends MapService {
 
       this.cesiumViewer = new Viewer(elementRef.nativeElement, {
         sceneMode: SceneMode.SCENE2D,
-        animation: false,
+        animation: true,
         baseLayerPicker: false,
         fullscreenButton: false,
         homeButton: false,
         infoBox: false,
         sceneModePicker: false,
         geocoder: false,
-        timeline: false,
+        timeline: true,
         selectionIndicator: false,
         navigationHelpButton: false,
         navigationInstructionsInitiallyVisible: false,
         clockViewModel: null,
         imageryProvider: new OpenStreetMapImageryProvider({
-          url: 'https://a.tile.openstreetmap.org/'
+          url: 'https://a.tile.openstreetmap.org/',
         }),
       });
     });
@@ -52,13 +62,14 @@ export class CesiumMapService extends MapService {
     this.mapReady$.next();
     this.mapReady$.complete();
 
-
-    this.maxZoomIn$.subscribe(val =>
-      this.cesiumViewer.scene.screenSpaceCameraController.minimumZoomDistance = val
+    this.maxZoomIn$.subscribe(
+      (val) =>
+        (this.cesiumViewer.scene.screenSpaceCameraController.minimumZoomDistance = val)
     );
 
-    this.maxZoomOut$.subscribe(val =>
-      this.cesiumViewer.scene.screenSpaceCameraController.maximumZoomDistance = val
+    this.maxZoomOut$.subscribe(
+      (val) =>
+        (this.cesiumViewer.scene.screenSpaceCameraController.maximumZoomDistance = val)
     );
   }
 
@@ -92,7 +103,8 @@ export class CesiumMapService extends MapService {
 
     const imageryLayer = this.cesiumViewer.imageryLayers.addImageryProvider(
       new ArcGisMapServerImageryProvider({
-        url: mapFeature.url, layers: mapFeature.layer.toString()
+        url: mapFeature.url,
+        layers: mapFeature.layer.toString(),
       })
     );
     this.imageryLayers.set(name, imageryLayer);

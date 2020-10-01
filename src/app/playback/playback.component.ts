@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import * as uuid from 'uuid';
+import { interval } from 'rxjs';
 import { CesiumMapService } from '@cesium-map';
+import { CzmlGeneratorService } from '../czml-generator.service';
 
 @Component({
   selector: 'app-playback',
@@ -16,7 +19,10 @@ export class PlaybackComponent implements OnInit {
   isPlaying = false;
   isSpedUp = false;
 
-  constructor(private cesiumMapService: CesiumMapService) {}
+  constructor(
+    private cesiumMapService: CesiumMapService,
+    private czmlGeneratorService: CzmlGeneratorService
+  ) {}
 
   ngOnInit(): void {
     this.playCommand = this.cesiumMapService.animationViewModel
@@ -49,5 +55,25 @@ export class PlaybackComponent implements OnInit {
       this.cesiumMapService.clockViewModel.multiplier = 10;
     }
     this.isSpedUp = !this.isSpedUp;
+  }
+
+  add() {
+    const targetId = uuid.v4();
+    const target = this.czmlGeneratorService.generateCzmlEntityPacket(
+      targetId,
+      '/assets/arrow.png'
+    );
+    const positionPackets = this.czmlGeneratorService.generatePositionPackets(
+      targetId
+    );
+    this.cesiumMapService.czmlDataSource.process(target);
+    const subscription = interval(100).subscribe((i) => {
+      if (i >= positionPackets.length) {
+        subscription.unsubscribe();
+      } else {
+        this.cesiumMapService.czmlDataSource.process(positionPackets[i]);
+        console.log(`Loaded packet ${i} for ${targetId}`);
+      }
+    });
   }
 }

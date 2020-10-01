@@ -10,6 +10,7 @@ import {
   ArcGisMapServerImageryProvider,
   Camera,
   ClockViewModel,
+  CzmlDataSource,
   ImageryLayer,
   OpenStreetMapImageryProvider,
   Rectangle,
@@ -20,6 +21,7 @@ import {
 @Injectable()
 export class CesiumMapService extends MapService {
   private cesiumViewer: Viewer;
+  private _czmlDataSource = new CzmlDataSource();
   private _clockViewModel: ClockViewModel;
   private _animationViewModel: AnimationViewModel;
 
@@ -31,6 +33,10 @@ export class CesiumMapService extends MapService {
 
   get viewer(): Viewer {
     return this.cesiumViewer;
+  }
+
+  get czmlDataSource() {
+    return this._czmlDataSource;
   }
 
   get clockViewModel() {
@@ -72,6 +78,7 @@ export class CesiumMapService extends MapService {
 
     this._clockViewModel = this.cesiumViewer.clockViewModel;
     this._animationViewModel = new AnimationViewModel(this._clockViewModel);
+    this.viewer.dataSources.add(this._czmlDataSource);
 
     this.mapReady$.next();
     this.mapReady$.complete();
